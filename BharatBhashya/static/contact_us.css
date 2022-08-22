@@ -1,0 +1,184 @@
+.create_case-box{
+    margin:1%;
+}
+.create_case-title{
+    text-align: center;
+    font-size: 30px;
+}
+
+/* ###########################  CUT THIS BELOW MENTION CODE and MAKE A SEPARATE CSS FILE. =================================================*/
+/* navBar starts here*/
+*{
+font-family: 'Poppins', sans-serif;
+}
+.navbar
+{
+padding:0;
+}
+.logo{
+position: relative ;
+left: 1%;
+}
+.bgcolor{
+background-color: #00c9b5 !important;
+}
+.navbar-brand{
+/* margin-left: 0.5rem; */
+margin-left: 5%;
+}
+.navbar{
+font-weight: bold;
+}
+.navlinks{
+margin-left: -10%;
+margin-right: 0%;
+}
+.nav-link{
+margin: 0px 1rem;
+}
+.search-btn{
+border:none;
+}
+.search-logo{
+width:20px;
+height:20px;
+}
+.header-login{
+margin-left: 40px;
+margin-right: 0;
+}
+/* ========NAV BAR ENDS ============= */
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+section {
+position: relative;
+margin-bottom: 0%;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 550px;
+background: whitesmoke;
+}
+
+section::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 50%;
+height: 550px;
+background: whitesmoke;
+}
+
+.contactForm {
+width: 1100px;
+height: 470px;
+z-index: 5;
+position: absolute;
+margin-top :-17%;
+padding: 50px 100px;
+background: #fff;
+box-shadow: 0 50px 50px rgba(0,0,0, 0.5);
+}
+
+.contactForm h2 {
+color: #0f3959;
+font-size: 27px;
+font-weight: 500;
+text-align: center;
+}
+
+.contactForm .formBox {
+position: relative;
+display: flex;
+justify-content: space-between;
+flex-wrap: wrap;
+padding-top: 30px;
+}
+
+.contactForm .formBox .inputBox {
+position: relative;
+margin: 0 0 35px 0;
+}
+
+.contactForm .formBox .inputBox.w50 {
+width: 47%;
+}
+
+.contactForm .formBox .inputBox.w100 {
+width: 100%;
+}
+
+.contactForm .formBox .inputBox input,
+.contactForm .formBox .inputBox textarea {
+width: 100% !important;
+padding: 5px 0;
+resize: none;
+font-size: 18px;
+font-weight: 300;
+color: #333;
+border: none;
+border-bottom: 1px solid #777;
+outline: none;
+}
+
+.contactForm .formBox .inputBox textarea {
+min-height: 80px;
+}
+
+.contactForm .formBox .inputBox span {
+position: absolute;
+left: 0;
+padding: 5px 0;
+font-size: 18px;
+font-weight: 300;
+color: #333;
+transition: 0.3s;
+pointer-events: none;
+}
+
+.contactForm .formBox .inputBox input:focus ~ span,
+.contactForm .formBox .inputBox textarea:focus ~ span,
+.contactForm .formBox .inputBox input:valid ~ span,
+.contactForm .formBox .inputBox textarea:valid ~ span {
+transform: translateY(-20px);
+font-size: 12px;
+font-weight: 400;
+letter-spacing: 1px;
+color: gray;
+}
+
+/* validation css */
+.contactForm .formBox .inputBox input.invalid ~ span,
+.contactForm .formBox .inputBox textarea.invalid ~ span {
+color: red;
+}
+
+/* validation css */
+.contactForm .formBox .inputBox input.invalid,
+.contactForm .formBox .inputBox textarea.invalid {
+border-bottom: 1px solid red;
+}
+
+.contactForm .formBox .inputBox input[type="submit"] {
+position: relative;
+cursor: pointer;
+background: #0f3959;
+margin-left: 42%;
+margin-top: 0%;
+color: #fff;
+border: none;
+max-width: 150px;
+padding: 12px;
+}
+
+.contactForm .formBox .inputBox input[type="submit"]:hover {
+background: #000;
+}
+
+/* ########################################## CSS-CODE ENDS HERE #####################################################*/

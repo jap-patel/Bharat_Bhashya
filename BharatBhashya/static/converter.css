@@ -1,0 +1,145 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:'popins',sans-serif;
+} 
+/* navBar starts her e*/
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.navbar
+{
+    padding:0;
+    margin: 0;
+}
+.logo{
+    position: relative ;
+    margin-left: 0 !important;
+}
+.bgcolor{
+    background-color: #00c9b5 !important;
+}
+.navbar-brand{
+    /* margin-left: 0.5rem; */
+    margin-left: 1%;
+}
+.navbar{
+    font-weight: bold;
+}
+.navlinks{
+    margin-left: -21%;
+    margin-right: 0%;
+}
+.nav-link{
+    margin: 0px 1rem;
+}
+.header-login{
+    margin-left: 40px;
+    margin-right: 0;
+}
+
+.nav-search{
+    margin-left:170px;
+}
+/* navBar ends here */
+
+.converter-box{
+    margin:2% 5%;
+}
+.converter-title{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 2%;
+}
+.screen-top
+{
+    margin-top:3.5%;
+}
+.mic-btn
+{
+    border:1px solid black;
+}
+.mic-text{
+    font-size:20px;
+    margin-left:2%;
+}
+.screen-size{
+    background-color:whitesmoke;
+    width:100%;
+    overflow-y:auto;
+}
+.controls
+{
+    margin:7%;
+    text-align:center;
+}
+
+
+/* Radio */
+.wrapper{
+    display: inline-flex;
+    height: 40px;
+    width: 350px;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+  }
+  .wrapper .option{
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 0 10px;
+    border: 2px solid lightgrey;
+    transition: all 0.3s ease;
+  }
+  .wrapper .option .dot{
+    height: 20px;
+    width: 20px;
+    background: #d9d9d9;
+    border-radius: 50%;
+    position: relative;
+  }
+  .wrapper .option .dot::before{
+    position: absolute;
+    content: "";
+    top: 4px;
+    left: 4px;
+    width: 12px;
+    height: 12px;
+    background: #0069d9;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(1.5);
+    transition: all 0.3s ease;
+  }
+  input[type="radio"]{
+    display: none;
+  }
+  #option-1:checked:checked ~ .option-1,
+  #option-2:checked:checked ~ .option-2{
+    border-color: #0069d9;
+    background: #0069d9;
+  }
+  #option-1:checked:checked ~ .option-1 .dot,
+  #option-2:checked:checked ~ .option-2 .dot{
+    background: #fff;
+  }
+  #option-1:checked:checked ~ .option-1 .dot::before,
+  #option-2:checked:checked ~ .option-2 .dot::before{
+    opacity: 1;
+    transform: scale(1);
+  }
+  .wrapper .option span{
+    font-size: 20px;
+    color: #808080;
+  }
+  #option-1:checked:checked ~ .option-1 span,
+  #option-2:checked:checked ~ .option-2 span{
+    color: #fff;
+  }

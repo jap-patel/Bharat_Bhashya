@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Add icon library -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <!-- JavaScript Bundle with Popper -->
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+  crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  <script src="/static/crime_category.js"></script>
+  <script src="/static/state_city.js"></script> 
+  <link rel="stylesheet" href="/static/create_case.css">
+  {% if not session.logged_in %}
+  <script type="text/javascript">
+      window.history.forward();
+      function noBack() {
+          window.history.forward();
+      }
+  </script>
+  {% endif %}
+</head>
+
+<body>
+
+  <nav class="navbar bgcolor navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{url_for('user')}}">
+        <img src="/static/img/logo.png" width="8%" height="8%" class="logo">
+        BharatBhashya</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse navlinks" id="navbarSupportedContent">        
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="{{url_for('user')}}">HOME</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for('converter')}}">CONVERTER</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for('about_us')}}">ABOUT US</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{url_for('contact_us')}}">CONTACT US</a>
+        </li>
+        <form action="/search_all_cases" class="d-flex nav-search" role="search">                                                                                                                                                         
+          <input class="form-control me-2" type="search" placeholder="Search other cases" aria-label="Search">
+          <button class="btn btn-light search-btn" type="submit"><i style="font-size:20px;" class="fa">&#xf002</i></button>
+        </form>            
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-left: 20px;">            
+            <a class="btn btn-danger" href="{{url_for('logout')}}">
+              <i style="font-size:24px" class="fa">&#xf011;</i>
+            </a>
+        </div>          
+        </ul>
+
+        <!-- <form class="d-flex" role="search">                                                                                               (................ This code is for Search-Bar & Search-Button................ )                                                                 
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light search-btn" type="submit"><img src="img/magnifying-glass.png" class="search-logo"></button>
+            </form> -->
+
+      </div>
+    </div>
+  </nav>
+
+  <div class="create_case-box">
+    <div class="create_case-title">CREATE CASE</div>
+    <form action="/create_case" method="POST" enctype="multipart/form-data" class="row g-3">
+      {% if msg %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{msg}}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>                                                                                                                                                     
+      {% endif %}  
+      <div class="col-md-4">
+        <label for="inputEmail4" class="form-label">FIR number</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe242;</i></span>
+          <input type="text" style="height:45px;" name="fir_number" class="form-control" id="validationCustomUsername"
+            aria-describedby="inputGroupPrepend" required>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="inputAddress" class="form-label">Case Name</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0f6;</i></span>
+          <input type="text" style="height:45px;" name="case_name" class="form-control" id="validationCustomUsername"
+            aria-describedby="inputGroupPrepend" required>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="inputAddress" class="form-label">Incharge of Case</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf2c2;</i></span>
+          <input type="text" style="height:45px;" name="case_incharge" class="form-control" id="validationCustomUsername"
+            aria-describedby="inputGroupPrepend" required>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="inputPassword4" class="form-label">State</label>
+        <div class="input-group has-validation" id="replace">
+          <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe0c8;</i></span>
+          <select id="state" style="height:45px;" name="state" class="form-select">
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="inputPassword4" class="form-label">City</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe0c8;</i></span>
+          <span id="city-code"></span>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="inputPassword4" class="form-label">Area</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe7f1;</i></span>
+          <input type="text" style="height:45px;" name="area" class="form-control" id="validationCustomUsername"
+            aria-describedby="inputGroupPrepend" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">Date Of Crime</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf073;</i></span>
+          <input type="date" style="height:45px;" name="date_of_crime" class="form-control" id="validationCustomUsername"
+            aria-describedby="inputGroupPrepend" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputAddress" class="form-label">Suspects</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0c0;</i></span>
+          <input type="text" style="height:45px;" name="suspects" class="form-control" id="validationCustomUsername"
+            placeholder="Suspect 1, Suspect 2, ..." aria-describedby="inputGroupPrepend" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Category</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0b0;</i></span>
+          <select id="category" style="height:45px;" name="crime_category" class="form-select" required>
+            <option selected>Choose...</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Sub Category</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0b0;</i></span>
+          <select id="subcategory-code" style="height:45px;" name="crime_sub_category" class="form-select" required>
+            <option selected>Choose...</option>
+            <option>...</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Keywords</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf02c;</i></span>
+          <select id="inputState" name="keywords" class="form-select selectpicker" multiple data-live-search="true" required>
+            <option> murder</option>
+            <option> robbery</option>
+            <option> fraud</option>
+            <option> cyberCrime</option>
+            <option> kindapping</option>
+            <option> underWorld</option>
+            <option> selfDefence</option>
+            <option> justice</option>
+            <option> serialKiller</option>
+            <option> narcotics</option>
+            <option> scam</option>
+            <option> laundering</option>
+            <option> genocide</option>
+            <option> racism</option>
+            <option> acidAttack</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Other Keywords</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf02c;</i></span>
+          <input type="text" style="height:52px;" placeholder="keyword 1, keyword 2, ..." name="other_keywords" class="form-control" id="validationCustomUsername"
+            aria-describedby="inputGroupPrepend">
+        </div>
+      </div>
+      <div class="col-md-6">
+
+      </div>
+      <div class="col-12">
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Summary</label>
+          <textarea class="form-control" name="summary" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <!-- <label for="inputPassword4" class="form-label">Summary</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>  -->
+      </div>
+      <div class="col-12" style="text-align:center;">
+        <a href="{{url_for('user')}}" type="submit" class="btn btn-primary">Back</a>
+        <button type="submit" class="btn btn-success">Save</button>
+      </div>
+    </form>
+  </div>
+  <script>
+    let user_state_code = "AP";
+
+    (function(){
+        let state_list = state_city['state'];
+        let city_list = state_city['city'];
+
+        let option = '';
+
+        for(let state_code in state_list){
+            let selected = (state_code == user_state_code) ? 'selected' : '';
+            option += '<option value="'+state_list[state_code]+'"'+selected + ' > ' + state_list[state_code] + '</option>';
+        }
+
+        document.getElementById('state').innerHTML = option;
+
+        let text_box = '<input type="text" class="input-text" id="city">';
+        let city_code_id = document.getElementById("city-code");
+
+
+        function create_city_dropdown(){
+            let state_code = document.getElementById("state").value;
+
+            let city = city_list[state_code];
+
+            if(!city){
+                city_code_id.innerHTML = text_box;
+                return;
+            }
+            
+            let option = '';
+            if(city.length>0){
+                option = '<select id="city" name="city" style="height:45px;width:385px;" class="form-select">\n';
+                for(let i=0;i<city.length;i++){
+                    option += '<option value = "' +city[i].name +' ">'+city[i].name+'</option>';
+                }    
+                option += '</select>';
+                console.log(option);
+                console.log(city_code_id);
+            }
+            else{
+                option = text_box;
+            }
+            city_code_id.innerHTML = option;
+        }
+        const state_select = document.getElementById('state');
+        state_select.addEventListener('change',create_city_dropdown);
+
+       create_city_dropdown();
+    })();
+
+    let user_category_code = "Drug Crimes";
+
+(function(){
+    let category_list = crime_category['category'];
+    let subcategory_list = crime_category['subcategory'];
+
+    let option = '';
+
+    for(let category_code in category_list){
+        let selected = (category_code == user_category_code) ? 'selected' : '';
+        option += '<option value="'+category_list[category_code]+'"'+selected + ' > ' + category_list[category_code] + '</option>';
+        console.log(option);
+    }
+
+    document.getElementById('category').innerHTML = option;
+
+    let text_box = '<input type="text" class="input-text" id="subcategory">';
+    let subcategory_code_id = document.getElementById("subcategory-code");
+    console.log(subcategory_code_id);
+
+    function create_subcategory_dropdown(){
+        let category_code = document.getElementById("category").value;
+        console.log(category_code);
+        let subcategory = subcategory_list[category_code];
+        console.log(subcategory.length);
+
+        if(!subcategory){
+            subcategory_code_id.innerHTML = text_box;
+            return;
+        }
+        
+        let option = '';
+        if(subcategory.length>0){
+            option = '<select id="subcategory">\n';
+            for(let i=0;i<subcategory.length;i++){
+                option += '<option value = "' +subcategory[i].name+' ">'+subcategory[i].name+'</option>';
+            }    
+            option += '</select>';
+            console.log(option);
+            console.log(subcategory_code_id);
+        }
+        else{
+            option = text_box;
+        }
+        subcategory_code_id.innerHTML = option;
+    }
+    const category_select = document.getElementById('category');
+    category_select.addEventListener('change',create_subcategory_dropdown);
+
+   create_subcategory_dropdown();
+})();
+</script>
+
+</body>
+
+</html>

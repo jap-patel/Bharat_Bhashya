@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-family:'popins',sans-serif;
+} 
+/* navBar starts her e*/
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+.bgcolor{
+    background-color: #00c9b5 !important;
+}
+.navbar-brand{
+    /* margin-left: 0.5rem; */
+    margin-left: 5%;
+}
+.navbar{
+    font-weight: bold;
+}
+.navlinks{
+    margin-left: -10%;
+    margin-right: 0%;
+}
+.nav-link{
+    margin: 0px 1rem;
+}
+.search-btn{
+    border:none;
+}
+.search-logo{
+    width:20px;
+    height:20px;
+}
+.header-login{
+    margin-left: 40px; 
+}
+/* navBar ends here */
+
+.main
+{
+    background-color: #00c9b5;
+}
+.hometitle
+{
+    position: absolute;
+    top:50%;
+    left:65%;
+}
+.getstarted
+{
+    width:100%;
+}
+.homeimg
+{
+    position: absolute;
+    top:15%;
+    left:5%;
+}
+
+.welcomeMsg{
+    transform: translate(-50%, -50%);
+
+    color: #fff;
+    font-size: 50px;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.Btn{
+    transform: translate(-50%, -50%);
+
+    padding:0.5rem 2rem;
+    border-radius: 9px;
+    font-weight: bold;
+    font-size: 25px;
+    color: #00c9b5;
+    border: none;
+    background-color: white;
+    text-decoration: none;
+    position: absolute;
+}
+
+.Btn:hover{
+    color: #000;
+    }
+    
