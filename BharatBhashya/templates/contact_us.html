@@ -21,53 +21,59 @@
     <link href="/static/contact_us.css" rel="stylesheet" />
 </head>
 
-
-
 <body style="background-color: whitesmoke;">
+      
+<!-- ==================================================navBar starts===================================================== -->  
+<nav class="navbar bgcolor navbar-expand-lg bg-light">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="{{url_for('home')}}">
+          <img src="/static/img/logo.png" width="8%" height="8%" class="logo">       
+          BharatBhashya</a>            
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  {% if login_status %}
+    <div class="collapse navbar-collapse navlinks" id="navbarSupportedContent" style="margin-left: -21%;">  
+  {% else %}
+    <div class="collapse navbar-collapse navlinks" id="navbarSupportedContent">
+  {% endif %}  
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{{url_for('home')}}">HOME</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{url_for('converter_understanding')}}">CONVERTER</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{url_for('about_us')}}">ABOUT US</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" href="{{url_for('contact_us')}}">CONTACT US</a>
+      </li>
 
-      <!-- NAV BAR STARTS HERE -->
-            <nav class="navbar bgcolor navbar-expand-lg bg-light">
-                <div class="container-fluid">
-                  <a class="navbar-brand" href="{{url_for('user')}}">
-                    <img src="/static/img/logo.png" width="8%" height="8%" class="logo">
-                    BharatBhashya</a>
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse navlinks" id="navbarSupportedContent">        
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item">
-                          <a class="nav-link" aria-current="page" href="{{url_for('user')}}">HOME</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{url_for('converter')}}">CONVERTER</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{url_for('about_us')}}">ABOUT US</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{url_for('contact_us')}}">CONTACT US</a>
-                    </li>
-                    <form action="/search_all_cases" class="d-flex nav-search" role="search">                                                                                                                                                         
-                      <input class="form-control me-2" type="search" placeholder="Search other cases" aria-label="Search">
-                      <button class="btn btn-light search-btn" type="submit"><i style="font-size:20px;" class="fa">&#xf002</i></button>
-                    </form>            
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-left: 20px;">            
-                        <a class="btn btn-danger" href="{{url_for('logout')}}">
-                          <i style="font-size:24px" class="fa">&#xf011;</i>
-                        </a>
-                    </div>          
-                    </ul>
-            
-                    <!-- <form class="d-flex" role="search">                                                                                               (................ This code is for Search-Bar & Search-Button................ )                                                                 
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-light search-btn" type="submit"><img src="img/magnifying-glass.png" class="search-logo"></button>
-                        </form> -->
-            
-                  </div>
-                </div>
-              </nav>
+      {% if login_status %}
+        <form class="d-flex nav-search" role="search">                                                                                                                                                         
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-light search-btn" type="submit"><i style="font-size:20px;" class="fa">&#xf002</i></button>
+        </form>
+          
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-left: 20px;">            
+            <a class="btn btn-danger" href="{{url_for('logout')}}">
+              <i style="font-size:24px" class="fa">&#xf011;</i>
+            </a>
+        </div>          
+      </ul>        
+      {% else %}
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a class="btn btn-outline-dark header-login" href="{{url_for('login')}}">Login</a>
+      </div>
+      </ul>
+      {% endif %}
+   
+
+  </div>
+</div>
+</nav>
 <!-- ===============================NAV BAR ENDS HERE===================================== -->
             <div class="create_case-title">
                 <div class="create_case-title" style="background-color: whitesmoke; margin-top: 2%; ">CONTACT US</div>
@@ -75,7 +81,13 @@
 
             <section>
                 <div class="container">
-                    <form action="/" class="contactForm" onsubmit="return validateMyForm();" method="POST">
+                    <form action="/contactForm" class="contactForm" method="POST">
+                        {% if msg %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          {{msg}}
+                          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>                                                                                                                                                     
+                      {% endif %}  
                         <input type="hidden" name="csrfmiddlewaretoken" value="mv0MYaOVqckSvTnpp3jMoMk93cx4AsehSnfqmt59HTKYKIitd1lWteAVhNmh5l1Z">
                         <h2>Send a Message</h2>
                         <div class="formBox">

@@ -1,0 +1,70 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-family:'popins',sans-serif;
+} 
+/* navBar starts her e*/
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.navbar
+{
+    padding:0;
+    margin: 0;
+}
+.logo{
+    position: relative ;
+    margin-left: 0 !important;
+}
+.bgcolor{
+    background-color: #00c9b5 !important;
+}
+.navbar-brand{
+    /* margin-left: 0.5rem; */
+    margin-left: 1%;
+}
+.navbar{
+    font-weight: bold;
+}
+.navlinks{
+    margin-left: -18%;
+    margin-right: 0%;
+}
+.nav-link{
+    margin: 0px 1rem;
+}
+.header-login{
+    margin-left: 40px;
+    margin-right: 0;
+}
+
+.nav-search{
+    margin-left:170px;
+}
+/* navBar ends here */
+
+.user_profile-box{
+    margin:2% 5%;
+}
+.create_case-title{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 2%;
+
+}
+.case-title
+{
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+.history-title{
+    text-align: center;
+    font-size:20px;
+    margin:2% 0;
+}
+.case-text{
+    margin-top:2%;
+}

@@ -158,7 +158,7 @@
           {% if speaker=="police" %}
             <div class="col-md-9 mt-2">
               <div>
-                <textarea class="screen-size">  
+                <textarea class="screen-size" style="height: 350px;">  
                  {{display_language_text}}
                 </textarea>
               </div>
@@ -166,14 +166,14 @@
           {% elif speaker=="suspect" %}        
             <div class="col-md-9 mt-2">
               <div>
-                <textarea class="screen-size">
+                <textarea class="screen-size" style="height: 350px;">
                 {{display_language_text}} 
                 </textarea>
               </div>
             </div>
             {% else %}
             <div class="col-md-9 mt-2">
-              <div class="screen-size">              
+              <div class="screen-size" style="height: 350px;">  
                 <script>
                   alert('please select a speaker')
                   </script>            
@@ -188,7 +188,7 @@
                 <span class="mic-text">Tap to Speak</span>
             </div>
             <div style="margin-top:24%;">
-              <i style="font-size:18px" class="btn btn-outline-dark fa">&#xf028;</i>
+              <a href="{{url_for('hear_last_dialogue', last_dialogue_text = last_dialogue_text, display_language_text = display_language_text, speaker = speaker, audio_language = audio_language)}}"><i style="font-size:18px" class="btn btn-outline-dark fa">&#xf028;</i></a>
               <span class="mic-text">Tap to hear</span></div>
           </div>
         </div>
@@ -197,25 +197,26 @@
   </form>
     <div class="row controls">
       <div>
-        <button class="btn btn-outline-warning" type="submit">
+        <button class="btn btn-outline-warning" type="submit" style = "margin-top: -5%;">
           <i style="font-size:24px" class="fa">&#xf093;</i>
           &nbsp;
           Upload Recording
         </button>
         &nbsp;&nbsp;&nbsp;  
-        <button class="btn btn-outline-success" type="submit">
+        <button class="btn btn-outline-success" type="submit" style = "margin-top: -5%;">
           <i style="font-size:24px" class="fa">&#xf0c7;</i>
           &nbsp;
           Save Session
         </button>
         &nbsp;&nbsp;&nbsp;
         <!-- Example single danger button -->
-          <button type="button" class="btn btn-outline-primary">
-            <i style="font-size:24px" class="fa">&#xf06e;</i>
-            &nbsp;
-            View Session Text
-          </button>
-          
+        <!--           
+        <button type="button" class="btn btn-outline-primary">
+          <i style="font-size:24px" class="fa">&#xf06e;</i>
+          &nbsp;
+          View Session Text
+        </button> -->
+
       </div>
     </div>
   </div>  

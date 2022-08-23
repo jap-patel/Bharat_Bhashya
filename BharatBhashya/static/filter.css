@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family:'popins',sans-serif;
+} 
+/* navBar starts her e*/
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.navbar
+{
+    padding:0;
+    margin: 0;
+}
+.logo{
+    position: relative ;
+    margin-left: 0 !important;
+}
+.bgcolor{
+    background-color: #00c9b5 !important;
+}
+.navbar-brand{
+    /* margin-left: 0.5rem; */
+    margin-left: 1%;
+}
+.navbar{
+    font-weight: bold;
+}
+.navlinks{
+    margin-left: -18%;
+    margin-right: 0%;
+}
+.nav-link{
+    margin: 0px 1rem;
+}
+.header-login{
+    margin-left: 40px;
+    margin-right: 0;
+}
+
+.nav-search{
+    margin-left:170px;
+}
+/* navBar ends here */
+
+.create_case-box{
+    margin:2% 5%;
+}
+.create_case-title{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 2%;
+
+}
+.filter-title
+{
+    margin-top:5%;
+    font-size:25px;
+    margin-bottom:5%;
+    text-align: center;
+}
+.filter-box
+{
+    border-radius:10px;
+    width: 100%;
+    background-color:whitesmoke;
+    height: auto;
+    padding:10px;
+}
+.filter-item
+{
+    margin:7% 4%;
+    padding:2%;
+}
+.form-label{
+    margin-bottom:7%;
+}
+.card-text{
+    margin-top:4%;
+}
+.card{
+    margin-bottom:2%;
+    background-color:whitesmoke;
+}

@@ -1,7 +1,9 @@
 from flask import Flask, flash, redirect, render_template, request, session, abort, Response, url_for
 import re
+import yagmail
 import helper
 import otherTextToText
+import otherTextToSpeech
 import otherSpeechToText
 
 app = Flask(__name__)
@@ -81,6 +83,8 @@ def open_case():
 
 @app.route('/user', methods = ['GET', 'POST'])
 def user():
+    open_case_result = ""
+    close_case_result = ""
     cases_conn = helper.connect_to_db('cases')
     cases_coll = cases_conn[2]        
     open_case_detail = cases_coll.find({"username": session['username'], "case_status": "open"}).sort('timestamp', -1).limit(5)
@@ -271,6 +275,7 @@ def select_languages():
             police_display_language_text = ""
             suspect_display_language_text = ""      
             display_language_text = ""
+            audio_language = ""
         except:
             speaker = "none"
             display_language_text = "none"
@@ -279,10 +284,14 @@ def select_languages():
             police_text = otherSpeechToText.speech_to_text(police_speech_language)
             police_display_language_text = otherTextToText.text_to_text(suspect_text_language, police_text)            
             display_language_text = "police: " + police_display_language_text 
+            audio_language = suspect_text_language
+            last_dialogue_text = "police: " + police_display_language_text 
         elif speaker == "suspect":
             suspect_text = otherSpeechToText.speech_to_text(suspect_speech_language)            
             suspect_display_language_text = otherTextToText.text_to_text(police_text_language, suspect_text)
             display_language_text = "suspect: " + suspect_display_language_text
+            audio_language = police_text_language
+            last_dialogue_text = "suspect: " + suspect_display_language_text
         with open("overall_" + str(form_police_speech_language) + "_to_" + str(form_suspect_speech_language) \
             + ".txt", "a+", encoding="utf-8") as f:
             if len(display_language_text)!=0:
@@ -296,7 +305,15 @@ def select_languages():
         # with open("overall_" + str(form_police_speech_language) + "_to_" + str(form_suspect_speech_language) \
         #     + ".txt", "a+", encoding="utf-8") as f:
             
-    return render_template('converter.html', display_language_text = display_language_text, speaker = speaker)
+    return render_template('converter.html', display_language_text = display_language_text, speaker = speaker, \
+        last_dialogue_text = last_dialogue_text, audio_language = audio_language)
+
+@app.route('/hear_last_dialogue/<display_language_text>/<speaker>/<last_dialogue_text>/<audio_language>', methods = ['GET','POST'])
+def hear_last_dialogue(display_language_text, speaker, last_dialogue_text, audio_language):
+    content = otherTextToSpeech.hear_the_audio(last_dialogue_text, audio_language)
+    print("after call", content)
+    return render_template('converter.html', display_language_text = display_language_text, speaker = speaker, \
+        last_dialogue_text = last_dialogue_text, audio_language = audio_language)
 
 @app.route('/search_all_cases', methods=['GET', 'POST'])
 def search_all_cases():
@@ -312,11 +329,48 @@ def terms_and_services():
 
 @app.route("/about_us")
 def about_us():
-    return render_template('about_us.html')
+    if session['logged_in'] == True:
+        login_status = True
+    else:
+        login_status = False    
+    return render_template('about_us.html', login_status = login_status)
+
+@app.route("/contactForm", methods=['GET', 'POST'])
+def contactForm():
+    msg = ""
+    if session['logged_in'] == True:
+        login_status = True        
+    else:
+        login_status = False        
+    if request.method == 'POST':
+        fname = request.form['fname']
+        lname = request.form['lname']
+        mail = request.form['mail']
+        number = request.form['number']
+        message = request.form['message']   
+        conn = helper.connect_to_db('users')
+        coll = conn[2]                                     
+        check_email = coll.find({"email": mail})
+        check_email = list(check_email) 
+        # if(len(check_email)!=0):            
+        #     yag = yagmail.SMTP()
+        #     contents = ["first name: " + fname + ", Last name: " + lname + "Email: " \
+        #         + mail + ", number: " + number + ", message: " + message]
+        #     yag.send('jappatel1704@gmail.com', 'subject', contents)
+        #     msg = "your email has been recieved !"
+        # else:
+        #     msg = "Email id doesn't exists !"
+        conn[1].close()
+    return render_template('contact_us.html', login_status = login_status, msg = msg)
 
 @app.route("/contact_us")
 def contact_us():
-    return render_template('contact_us.html')
+    msg = ""
+    if session['logged_in'] == True:
+        login_status = True
+    else:
+        login_status = False
+    return render_template('contact_us.html', login_status = login_status, msg = msg)
 
 @app.route("/converter_understanding")
 def converter_understanding():

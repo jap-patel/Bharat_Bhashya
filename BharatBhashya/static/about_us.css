@@ -1,0 +1,144 @@
+*{
+    /* border: solid 1px red;  */
+    margin: 0px;
+    padding: 0px;
+}
+.header{
+    padding-top: 60px ;
+    color: #444;
+    font-size: 20px;
+    margin: auto;
+    line-height: 50px;
+}
+.sub-container{
+    max-width: 1200px;
+    margin: auto;
+    padding: 48px 0px;
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: center;
+
+}
+
+.teams{
+    margin: 10px;
+    padding: 20px;
+    max-width: 30%;
+    cursor: pointer;
+    transition: 0.4s; 
+    box-sizing: border-box;
+}
+.teams:hover{
+    background:#ddd;
+    border-radius: 12px;
+}
+
+.teams img{
+    width: 200px;
+    height: 200px;
+
+}
+.name{
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.designation{
+    font-style: italic;
+    color: #888;
+}
+
+.about{
+    margin: 20px 0px;
+    font-weight: lighter;
+    color: #4e4e4e;
+}
+
+.social-link{
+    margin:14px;
+}
+.social-link a{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    transition: 0.4s;
+}
+.social-link a:hover{
+    transform: scale(1.5);
+}
+
+.card{
+    /* border: 2px red solid; */
+    background-color : whitesmoke;
+    /* width: 320px !important; */
+
+}
+.social-link a i{
+    color: #444;
+}
+.vishal{
+    border: #000 solid 2px;
+}
+
+.img_card{
+    width:100%;
+    height: 70% !important;
+}
+.card-body{
+    text-align: center;;
+}
+.card-text{
+    font-size: 16px;
+}
+/* .card{
+    height: 300px;
+    width: 100px !important;
+} */
+
+
+
+
+
+/* =================navBar-css starts here*/
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.logo{
+    position: relative ;
+    left: 1%;
+}
+.navbar
+{
+    padding:0;
+}
+.bgcolor{
+    background-color: #00c9b5 !important;
+}
+.navbar-brand{
+    /* margin-left: 0.5rem; */
+    margin-left: 5%;
+}
+.navbar{
+    font-weight: bold;
+}
+.navlinks{
+    margin-left: -10%;
+    margin-right: 0%;
+}
+.nav-link{
+    margin: 0px 1rem;
+}
+.search-btn{
+    border:none;
+}
+.search-logo{
+    width:20px;
+    height:20px;
+}
+.header-login{
+    margin-left: 40px;
+    margin-right: 0;
+}
+/* ============navBar-css ends here */
