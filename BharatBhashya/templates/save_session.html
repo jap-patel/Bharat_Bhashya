@@ -76,12 +76,12 @@
 
   <div class="create_case-box">
     <div class="create_case-title">SAVE SESSION</div>
-    <form class="row g-3">
+    <form action="/enter_session_details" method="POST" enctype="multipart/form-data" class="row g-3">
       <div class="col-md-4">
         <label for="inputEmail4" class="form-label">FIR number</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe242;</i></span>
-          <input type="text" style="height:45px;" class="form-control" id="validationCustomUsername"
+          <input type="text" name="fir_number" style="height:45px;" class="form-control" id="validationCustomUsername"
             aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
@@ -89,7 +89,7 @@
         <label for="inputAddress" class="form-label">Case Name</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0f6;</i></span>
-          <input type="text" style="height:45px;" class="form-control" id="validationCustomUsername"
+          <input type="text" name="case_name" style="height:45px;" class="form-control" id="validationCustomUsername"
             aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
@@ -97,32 +97,7 @@
         <label for="inputAddress" class="form-label">Session Name</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0f6;</i></span>
-          <input type="text" style="height:45px;" class="form-control" id="validationCustomUsername"
-            aria-describedby="inputGroupPrepend" required>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="inputPassword4" class="form-label">State</label>
-        <div class="input-group has-validation" id="replace">
-          <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe0c8;</i></span>
-          <select id="state" style="height:45px;" class="form-select">
-            <option selected>Choose...</option>
-            <option>...</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="inputPassword4" class="form-label">City</label>
-        <div class="input-group has-validation">
-          <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe0c8;</i></span>
-          <span id="city-code"></span>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <label for="inputPassword4" class="form-label">Area</label>
-        <div class="input-group has-validation">
-          <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe7f1;</i></span>
-          <input type="text" style="height:45px;" class="form-control" id="validationCustomUsername"
+          <input type="text" name="session_name" style="height:45px;" class="form-control" id="validationCustomUsername"
             aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
@@ -130,7 +105,7 @@
         <label for="inputAddress" class="form-label">Date Of Session</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf073;</i></span>
-          <input type="date" style="height:45px;" class="form-control" id="validationCustomUsername"
+          <input type="date" name="session_date" style="height:45px;" class="form-control" id="validationCustomUsername"
             aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
@@ -138,7 +113,7 @@
         <label for="inputAddress" class="form-label">Session Incharge</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf2c2;</i></span>
-          <input type="text" style="height:45px;" class="form-control" id="validationCustomUsername"
+          <input type="text" name="session_incharge" style="height:45px;" class="form-control" id="validationCustomUsername"
            aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
@@ -146,12 +121,11 @@
         <label for="inputAddress" class="form-label">Name of Suspects</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0c0;</i></span>
-          <input type="text" style="height:45px;" class="form-control" id="validationCustomUsername" placeholder="Suspect 1, Suspect 2"
+          <input type="text" name="suspect_name" style="height:45px;" class="form-control" id="validationCustomUsername" placeholder="Suspect 1, Suspect 2"
            aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
-      <div class="col-12" style="text-align:center;">
-        <button type="submit" class="btn btn-primary">Back</button>
+      <div class="col-12" style="text-align:center; margin-top: 2%;">        
         <button type="submit" class="btn btn-success">Save</button>
       </div>
     </form>

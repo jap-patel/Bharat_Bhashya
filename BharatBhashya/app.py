@@ -18,7 +18,7 @@ def home():
     if not session.get('logged_in'):        
         return render_template('index.html')
     else:
-        return render_template('user.html')
+        return user()
 
 @app.route("/converter")
 def converter():
@@ -202,7 +202,7 @@ def create_case():
         check_fir_number = list(check_fir_number)        
         check_case_name = coll.find({"case_name": case_name})
         check_case_name = list(check_case_name)            
-        if(len(check_case_name) != 0 and len(check_fir_number) != 0):    
+        if(len(check_case_name) == 0 and len(check_fir_number) == 0):    
             create_case = coll.insert_one(
                 {"username": session['username'],"fir_number":fir_number, "case_name": case_name, "case_incharge":case_incharge,\
                 "state": state,"city":city, "area": area, "date_of_crime":date_of_crime, \
@@ -211,7 +211,7 @@ def create_case():
             if create_case:            
                 print("You have Successfully created a case")                 
                 conn[1].close()
-                return render_template('user.html') 
+                return user()
         else:
             print('fir_number or case name already registered')
             msg = 'FIR number or Case Name already registered'
@@ -314,6 +314,25 @@ def hear_last_dialogue(display_language_text, speaker, last_dialogue_text, audio
     print("after call", content)
     return render_template('converter.html', display_language_text = display_language_text, speaker = speaker, \
         last_dialogue_text = last_dialogue_text, audio_language = audio_language)
+
+@app.route('/save_session', methods=['GET', 'POST'])
+def save_session():
+    suspect_name = request.form['suspect_name']
+    session_incharge = request.form['session_incharge']
+    session_date = request.form['session_date']
+    session_name = request.form['session_name']
+    case_name = request.form['case_name']
+    fir_number = request.form['fir_number']
+    session_conn = helper.connect_to_db('sessions')
+    session_coll = session_conn[2]        
+    session_detail = session_coll.insert_one( {"fir_number":fir_number, "case_name": case_name, "session_incharge":session_incharge,\
+                "suspect_name": suspect_name,"session_name":session_name, "session_date":session_date})
+    session_result = list(session_detail)
+    print('starts here')
+    print(session_result)
+    print('ends here')
+    session_conn[1].close()
+    return render_template('converter.html')
 
 @app.route('/search_all_cases', methods=['GET', 'POST'])
 def search_all_cases():

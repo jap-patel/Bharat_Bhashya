@@ -174,9 +174,10 @@
             {% else %}
             <div class="col-md-9 mt-2">
               <div class="screen-size" style="height: 350px;">  
-                <script>
-                  alert('please select a speaker')
-                  </script>            
+                
+                
+                
+                
               </div>
             </div>
           {% endif %}                    
@@ -203,11 +204,14 @@
           Upload Recording
         </button>
         &nbsp;&nbsp;&nbsp;  
-        <button class="btn btn-outline-success" type="submit" style = "margin-top: -5%;">
+        
+        
+        <a href="{{url_for('save_session')}}" class="btn btn-outline-success" type="submit" style = "margin-top: -5%;">
           <i style="font-size:24px" class="fa">&#xf0c7;</i>
           &nbsp;
           Save Session
-        </button>
+        </a>
+        
         &nbsp;&nbsp;&nbsp;
         <!-- Example single danger button -->
         <!--           

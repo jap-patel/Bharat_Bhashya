@@ -21,6 +21,6 @@ def hear_the_audio(content, language):
     pygame.mixer.music.load(mp3_fo, 'mp3')
     pygame.mixer.music.play()
     time.sleep(15)
-    # myobj.save("temp123-hindi.wav")
+    myobj.save("temp123-hindi.wav")
 
     return content
