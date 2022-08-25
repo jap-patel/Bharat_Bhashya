@@ -1,6 +1,7 @@
 from flask import Flask, flash, redirect, render_template, request, session, abort, Response, url_for
 import re
 import yagmail
+import os
 import helper
 import otherTextToText
 import otherTextToSpeech
@@ -21,11 +22,7 @@ def home():
         return user()
 
 @app.route("/converter")
-def converter():
-    # police_speech_language = request.form['police_speech_language']
-    # suspect_speech_language = request.form['suspect_speech_language']
-    # target_text_language = request.form['target_text_language']
-    # return render_template('save_session.html')
+def converter():    
     return render_template('converter.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -269,16 +266,20 @@ def select_languages():
         suspect_speech_language = helper.get_speech_language(form_suspect_speech_language)
         police_text_language = helper.get_text_language(form_police_speech_language)
         suspect_text_language = helper.get_text_language(form_suspect_speech_language)
-        target_language = helper.get_text_language(form_target_language)
+        
         try:
             speaker = request.form['speaker']   
             police_display_language_text = ""
             suspect_display_language_text = ""      
             display_language_text = ""
             audio_language = ""
+            last_dialogue_text = ""
+            
         except:
             speaker = "none"
             display_language_text = "none"
+            last_dialogue_text = "none"
+            audio_language = "none"
         # print(speaker)
         if speaker == "police":
             police_text = otherSpeechToText.speech_to_text(police_speech_language)
@@ -306,33 +307,61 @@ def select_languages():
         #     + ".txt", "a+", encoding="utf-8") as f:
             
     return render_template('converter.html', display_language_text = display_language_text, speaker = speaker, \
-        last_dialogue_text = last_dialogue_text, audio_language = audio_language)
+        last_dialogue_text = last_dialogue_text, audio_language = audio_language, \
+        form_police_speech_language = form_police_speech_language, form_suspect_speech_language = form_suspect_speech_language,\
+        form_target_language = form_target_language)
 
-@app.route('/hear_last_dialogue/<display_language_text>/<speaker>/<last_dialogue_text>/<audio_language>', methods = ['GET','POST'])
-def hear_last_dialogue(display_language_text, speaker, last_dialogue_text, audio_language):
+@app.route('/hear_last_dialogue/<display_language_text>/<speaker>/<last_dialogue_text>/\
+    <audio_language>/<form_police_speech_language>/<form_suspect_speech_language>/<form_target_language>', methods = ['GET','POST'])
+def hear_last_dialogue(display_language_text, speaker, last_dialogue_text, audio_language, \
+    form_police_speech_language, form_suspect_speech_language, form_target_language):
     content = otherTextToSpeech.hear_the_audio(last_dialogue_text, audio_language)
     print("after call", content)
     return render_template('converter.html', display_language_text = display_language_text, speaker = speaker, \
-        last_dialogue_text = last_dialogue_text, audio_language = audio_language)
+        last_dialogue_text = last_dialogue_text, audio_language = audio_language, form_target_language = form_target_language, \
+        form_police_speech_language = form_police_speech_language, form_suspect_speech_language = form_suspect_speech_language)
 
-@app.route('/save_session', methods=['GET', 'POST'])
-def save_session():
+@app.route('/save_session/<display_language_text>/<form_police_speech_language>/<form_suspect_speech_language>/<form_target_language>', methods=['GET', 'POST'])
+def save_session(display_language_text, form_target_language, form_police_speech_language, form_suspect_speech_language):   
+    return render_template('save_session.html', form_target_language = form_target_language, display_language_text = display_language_text, \
+        form_police_speech_language = form_police_speech_language, form_suspect_speech_language = form_suspect_speech_language)
+
+@app.route('/enter_session_details/<msg>/<form_police_speech_language>/<form_suspect_speech_language>/<form_target_language>', methods=['GET', 'POST'])
+def enter_session_details(msg, form_police_speech_language, form_suspect_speech_language, form_target_language):
+    msg = ""
     suspect_name = request.form['suspect_name']
     session_incharge = request.form['session_incharge']
     session_date = request.form['session_date']
     session_name = request.form['session_name']
     case_name = request.form['case_name']
     fir_number = request.form['fir_number']
-    session_conn = helper.connect_to_db('sessions')
-    session_coll = session_conn[2]        
-    session_detail = session_coll.insert_one( {"fir_number":fir_number, "case_name": case_name, "session_incharge":session_incharge,\
-                "suspect_name": suspect_name,"session_name":session_name, "session_date":session_date})
-    session_result = list(session_detail)
-    print('starts here')
-    print(session_result)
-    print('ends here')
-    session_conn[1].close()
-    return render_template('converter.html')
+    case_conn = helper.connect_to_db('cases')                
+    case_coll = case_conn[2]
+    check_case = case_coll.find({"fir_number": fir_number, "case_name": case_name})                  
+    case_result = list(check_case)
+    if(len(case_result) != 0):            
+        session_conn = helper.connect_to_db('sessions')
+        session_coll = session_conn[2]             
+        with open("overall_" + str(form_police_speech_language) + "_to_" + str(form_suspect_speech_language) + ".txt", "r", encoding="utf-8") as f:
+            f.seek(0)
+            overall_text = f.read()
+            f.close()    
+        os.remove("overall_" + str(form_police_speech_language) + "_to_" + str(form_suspect_speech_language) + ".txt")
+        target_language = helper.get_text_language(form_target_language)
+        target_language_text = otherTextToText.text_to_text(target_language, overall_text)     
+        session_count = session_coll.find().count({"fir_number": fir_number}) + 1
+        session_detail = session_coll.insert_one({"fir_number":fir_number, "case_name": case_name, "session_incharge":session_incharge, "session_conversation_text":overall_text, \
+            "suspect_name": suspect_name,"session_name":session_name, "session_date":session_date, "session_number":session_count, "target_language_text":target_language_text})
+        if session_detail:
+            print("case details inserted")
+        else:
+            print("case details not inserted")
+        session_conn[1].close()
+        case_conn[1].close()
+        return view_session(fir_number)
+    else:
+        msg = "FIR number and case name aren't macthing or are incorrect!"
+    return enter_session_details(msg, form_police_speech_language, form_suspect_speech_language, form_target_language)
 
 @app.route('/search_all_cases', methods=['GET', 'POST'])
 def search_all_cases():
@@ -345,6 +374,18 @@ def forgot_password():
 @app.route('/terms_and_services', methods=['GET', 'POST'])
 def terms_and_services():
     return render_template('terms_and_services.html')    
+
+@app.route('/target_language_text_file/<target_language_text_file>', methods=['GET', 'POST'])
+def target_language_text_file(target_language_text_file):
+    target_language_text_file = target_language_text_file.replace("Police", "\nPolice")
+    target_language_text_file = target_language_text_file.replace("Suspect", "\nSuspect")
+    return render_template('target_language_text_file.html', target_language_text_file = target_language_text_file)    
+
+@app.route('/session_conversation_text_file/<session_conversation_text_file>', methods=['GET', 'POST'])
+def session_conversation_text_file(session_conversation_text_file):    
+    session_conversation_text_file = session_conversation_text_file.replace("Police", "\nPolice")
+    session_conversation_text_file = session_conversation_text_file.replace("Suspect", "\nSuspect")
+    return render_template('session_conversation_text_file.html', session_conversation_text_file = session_conversation_text_file)    
 
 @app.route("/about_us")
 def about_us():
@@ -405,9 +446,6 @@ def logout():
 
 if __name__ == "__main__":
     app.secret_key = 'super secret key'
-    # login_manager = LoginManager()
-    # login_manager.init_app(app)
-    # login_manager.login_view = 'login'
     app.run(debug=True, port=8000)
 
 
