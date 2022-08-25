@@ -79,8 +79,6 @@
     </div>
   </nav>
 
-
-
   <div class="create_case-box">
     <div class="create_case-title">CREATE CASE</div>
     <form action="/create_case" method="POST" enctype="multipart/form-data" class="row g-3">
@@ -91,31 +89,31 @@
         </div>                                                                                                                                                     
       {% endif %}  
       <div class="col-md-4">
-        <label for="inputEmail4" class="form-label">FIR number</label><span style="color: red;"> *</span>
+        <label for="inputEmail4" class="form-label">FIR number</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe242;</i></span>
           <input type="text" style="height:45px;" name="fir_number" class="form-control" id="validationCustomUsername"
-            aria-describedby="inputGroupPrepend" required  placeholder="Eg.- (RegionCode-StationCode-GR_Number)">
+            aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
       <div class="col-md-4">
-        <label for="inputAddress" class="form-label">Case Name</label><span style="color: red;"> *</span>
+        <label for="inputAddress" class="form-label">Case Name</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0f6;</i></span>
           <input type="text" style="height:45px;" name="case_name" class="form-control" id="validationCustomUsername"
-            aria-describedby="inputGroupPrepend" required  placeholder="Eg.- Bank-fraud">
+            aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
       <div class="col-md-4">
-        <label for="inputAddress" class="form-label">Incharge of Case</label><span style="color: red;"> *</span>
+        <label for="inputAddress" class="form-label">Incharge of Case</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf2c2;</i></span>
           <input type="text" style="height:45px;" name="case_incharge" class="form-control" id="validationCustomUsername"
-            aria-describedby="inputGroupPrepend" required  placeholder="Eg.- IPS Vishal Oza.">
+            aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
       <div class="col-md-4">
-        <label for="inputPassword4" class="form-label">State</label><span style="color: red;"> *</span>
+        <label for="inputPassword4" class="form-label">State</label>
         <div class="input-group has-validation" id="replace">
           <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe0c8;</i></span>
           <select id="state" style="height:45px;" name="state" class="form-select">
@@ -124,20 +122,8 @@
           </select>
         </div>
       </div>
-
-      <!-- <div class="col-md-4">
+      <div class="col-md-4">
         <label for="inputPassword4" class="form-label">City</label>
-        <div class="input-group has-validation" id="replace">
-          <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe0c8;</i></span>
-          <select id="state" style="height:45px;" name="state" class="form-select">
-            <option selected>Choose...</option>
-            <option>...</option>
-          </select>
-        </div>
-      </div> -->
-
-      <div class="col-md-4">
-        <label for="inputPassword4" class="form-label">City</label><span style="color: red;"> *</span>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe0c8;</i></span>
           <span id="city-code"></span>
@@ -148,11 +134,11 @@
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i class="material-icons">&#xe7f1;</i></span>
           <input type="text" style="height:45px;" name="area" class="form-control" id="validationCustomUsername"
-            aria-describedby="inputGroupPrepend" required placeholder="Eg.- Shashtri Nagar.">
+            aria-describedby="inputGroupPrepend" required>
         </div>
       </div>
       <div class="col-md-6">
-        <label for="inputAddress" class="form-label">Date Of Crime</label><span style="color: red;"> *</span>
+        <label for="inputAddress" class="form-label">Date Of Crime</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf073;</i></span>
           <input type="date" style="height:45px;" name="date_of_crime" class="form-control" id="validationCustomUsername"
@@ -160,7 +146,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <label for="inputAddress" class="form-label">Suspects</label><span style="color: red;"> *</span>
+        <label for="inputAddress" class="form-label">Suspects</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0c0;</i></span>
           <input type="text" style="height:45px;" name="suspects" class="form-control" id="validationCustomUsername"
@@ -168,7 +154,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <label for="inputPassword4" class="form-label">Category</label><span style="color: red;"> *</span>
+        <label for="inputPassword4" class="form-label">Category</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0b0;</i></span>
           <select id="category" style="height:45px;" name="crime_category" class="form-select" required>
@@ -177,10 +163,10 @@
         </div>
       </div>
       <div class="col-md-6">
-        <label for="inputPassword4" class="form-label">Sub Category</label><span style="color: red;"> *</span>
+        <label for="inputPassword4" class="form-label">Sub Category</label>
         <div class="input-group has-validation">
           <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px" class="fa">&#xf0b0;</i></span>
-          <select id="subcategory-code" style="height:45px;" name="crime_sub_category" class="form-select" required aria-placeholder="xyz.">
+          <select id="subcategory-code" style="height:45px;" name="crime_sub_category" class="form-select" required>
             <option selected>Choose...</option>
             <option>...</option>
           </select>
@@ -222,8 +208,8 @@
       </div>
       <div class="col-12">
         <div class="form-group">
-          <label for="exampleFormControlTextarea1">Summary</label><span style="color: red;"> *</span>
-          <textarea class="form-control" name="summary" id="exampleFormControlTextarea1" rows="3" placeholder="write detailed information about the incident."></textarea>
+          <label for="exampleFormControlTextarea1">Summary</label>
+          <textarea class="form-control" name="summary" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
         <!-- <label for="inputPassword4" class="form-label">Summary</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>  -->

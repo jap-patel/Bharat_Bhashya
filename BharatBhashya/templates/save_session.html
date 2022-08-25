@@ -76,10 +76,10 @@
 
   <div class="create_case-box">
     <div class="create_case-title">SAVE SESSION</div>
-    <form action="{{url_for('enter_session_details',msg = '', form_target_language = form_target_language, 
+    <form action="{{url_for('enter_session_details',msg = msg, form_target_language = form_target_language, 
     form_police_speech_language = form_police_speech_language, form_suspect_speech_language = form_suspect_speech_language) 
     }}" method="POST" enctype="multipart/form-data" class="row g-3">
-      {% if msg %}
+      {% if msg!="none" %}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         {{msg}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

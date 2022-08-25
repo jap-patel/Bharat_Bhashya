@@ -181,6 +181,7 @@ def create_case():
         and 'date_of_crime' in request.form and 'suspects' in request.form and 'crime_category' in request.form and \
         'crime_sub_category' in request.form:
         fir_number = request.form['fir_number']
+        fir_number = str(fir_number)
         case_name = request.form['case_name']
         case_incharge = request.form['case_incharge']
         state = request.form['state']  
@@ -323,12 +324,12 @@ def hear_last_dialogue(display_language_text, speaker, last_dialogue_text, audio
 
 @app.route('/save_session/<display_language_text>/<form_police_speech_language>/<form_suspect_speech_language>/<form_target_language>', methods=['GET', 'POST'])
 def save_session(display_language_text, form_target_language, form_police_speech_language, form_suspect_speech_language):   
-    return render_template('save_session.html', form_target_language = form_target_language, display_language_text = display_language_text, \
+    return render_template('save_session.html', msg = "none", form_target_language = form_target_language, display_language_text = display_language_text, \
         form_police_speech_language = form_police_speech_language, form_suspect_speech_language = form_suspect_speech_language)
 
 @app.route('/enter_session_details/<msg>/<form_police_speech_language>/<form_suspect_speech_language>/<form_target_language>', methods=['GET', 'POST'])
 def enter_session_details(msg, form_police_speech_language, form_suspect_speech_language, form_target_language):
-    msg = ""
+    msg = "none"
     suspect_name = request.form['suspect_name']
     session_incharge = request.form['session_incharge']
     session_date = request.form['session_date']
@@ -349,7 +350,10 @@ def enter_session_details(msg, form_police_speech_language, form_suspect_speech_
         os.remove("overall_" + str(form_police_speech_language) + "_to_" + str(form_suspect_speech_language) + ".txt")
         target_language = helper.get_text_language(form_target_language)
         target_language_text = otherTextToText.text_to_text(target_language, overall_text)     
-        session_count = session_coll.find().count({"fir_number": fir_number}) + 1
+        session_count = 0
+        # session_count = session_coll.find().count({"fir_number": fir_number}) 
+        session_count = session_coll.count_documents({"fir_number": fir_number})        
+        session_count += 1
         session_detail = session_coll.insert_one({"fir_number":fir_number, "case_name": case_name, "session_incharge":session_incharge, "session_conversation_text":overall_text, \
             "suspect_name": suspect_name,"session_name":session_name, "session_date":session_date, "session_number":session_count, "target_language_text":target_language_text})
         if session_detail:
@@ -422,6 +426,163 @@ def contactForm():
         #     msg = "Email id doesn't exists !"
         conn[1].close()
     return render_template('contact_us.html', login_status = login_status, msg = msg)
+
+@app.route("/add_security_agencies",methods=['GET','POST'])
+def add_security_agencies(): 
+    msg = ''
+    security_agencies_list=[]
+    admin_conn = helper.connect_to_db('security_agencies')
+    admin_coll = admin_conn[2]
+    security_agencies_list = admin_coll.find()
+    security_agencies_list = list(security_agencies_list)
+    if request.method == 'POST' and  'security_agency_name' in request.form:
+        agency_name = request.form['security_agency_name']
+        check_agencies = admin_coll.find({'agency_name' : agency_name})
+        check_agencies = list(check_agencies)
+        if(len(check_agencies)):
+            print("Security Agency already exists..")
+            msg  = 'Security Agency already exists..'
+            security_agencies_list = admin_coll.find()
+            security_agencies_list = list(security_agencies_list)
+            admin_conn[1].close()   
+            return render_template('add_security_agencies.html',security_agencies_list=security_agencies_list,msg=msg)
+        else:
+            add_security_agencies = admin_coll.insert_one({"agency_name":agency_name})
+            print(add_security_agencies)
+            if add_security_agencies :
+                print(" agencies added..")
+                msg = 'Succesfully agencies added..' 
+                security_agencies_list = admin_coll.find()
+                security_agencies_list = list(security_agencies_list)
+                admin_conn[1].close()   
+                return render_template('add_security_agencies.html',msg = msg,security_agencies_list = security_agencies_list)
+            else:
+                print("Can't enter data..")
+                msg = 'Can not interst data'
+                security_agencies_list = admin_coll.find()
+                security_agencies_list = list(security_agencies_list)
+                admin_conn[1].close()   
+                return render_template('add_security_agencies.html',msg = msg,security_agencies_list = security_agencies_list)  
+
+    return render_template('add_security_agencies.html',security_agencies_list = security_agencies_list,msg=msg)
+
+@app.route("/delete/<string:agency_name>",methods=['GET','POST'])
+def delete(agency_name):
+    msg=''
+    admin_conn = helper.connect_to_db('security_agencies')
+    admin_coll = admin_conn[2]
+    security_agencies_list = admin_coll.find()
+    security_agencies_list = list(security_agencies_list)
+    check_agencies = admin_coll.find({'agency_name' : agency_name})
+    check_agencies = list(check_agencies)
+    if(len(check_agencies)):
+        delete = admin_coll.remove({"agency_name":agency_name})
+        if(delete):
+            print("Agency deleted successfully..")
+            msg = 'Agency deleted successfully..'
+            security_agencies_list = admin_coll.find()
+            security_agencies_list = list(security_agencies_list)
+            admin_conn[1].close()   
+            return render_template('add_security_agencies.html',msg = msg,security_agencies_list = security_agencies_list)
+
+        else:
+            print("Can't delete data..")
+            msg = 'Can not delete data'
+            security_agencies_list = admin_coll.find()
+            security_agencies_list = list(security_agencies_list)
+            admin_conn[1].close()   
+            return render_template('add_security_agencies.html',msg = msg,security_agencies_list = security_agencies_list)  
+    return render_template('add_security_agencies.html',security_agencies_list = security_agencies_list,msg=msg)
+
+@app.route("/update_security_agency_page/<string:agency_name>",methods=['GET','POST'])
+def update_security_agency_page(agency_name):
+    admin_conn = helper.connect_to_db('security_agencies')
+    admin_coll = admin_conn[2]
+    security_agencies_list = admin_coll.find()
+    security_agencies_list = list(security_agencies_list)
+    #print(security_agencies_list)
+    return render_template('update_detail.html',agency_name=agency_name,security_agencies_list = security_agencies_list)
+
+@app.route("/update/<string:agency_name>",methods=['GET','POST'])
+def update(agency_name):
+    msg=''
+    admin_conn = helper.connect_to_db('security_agencies')
+    admin_coll = admin_conn[2]
+    security_agencies_list = admin_coll.find()
+    security_agencies_list = list(security_agencies_list)
+    print(security_agencies_list)
+    if request.method == 'POST' and  'new_security_name' in request.form:
+        new_agency_name = request.form['new_security_name']
+        print(new_agency_name)
+        check_agencies = admin_coll.find({'agency_name' : agency_name})
+        check_agencies = list(check_agencies)
+        if(len(check_agencies)):
+            update = admin_coll.update_one({"agency_name":agency_name} ,{"$set":{"agency_name":new_agency_name}})
+            if(update):
+                print("Agency updated successfully..")
+                msg = 'Agency updated successfully..'
+                security_agencies_list = admin_coll.find()
+                security_agencies_list = list(security_agencies_list)
+                admin_conn[1].close()   
+            return render_template('update_detail.html',msg = msg,security_agencies_list = security_agencies_list)
+
+        else:
+            print("Can't update data..")
+            msg = 'Can not update data'
+            security_agencies_list = admin_coll.find()
+            security_agencies_list = list(security_agencies_list)
+            admin_conn[1].close()   
+            return render_template('update_detail.html',msg = msg,security_agencies_list = security_agencies_list)  
+    return render_template('update_detail.html',security_agencies_list = security_agencies_list,msg=msg)
+
+@app.route('/admin',methods = ['GET','POST'])
+def admin():
+    msg = ""
+    if request.method == "POST" and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        admin_conn = helper.connect_to_db('admin_user')
+        admin_coll = admin_conn[2]
+        check_user = admin_coll.find({"admin_user": username, "admin_pass": password})                  
+        user_result = list(check_user)    
+        print(user_result)            
+        if(len(user_result) != 0):
+            session['logged_in'] = True
+            session['username'] = username
+            print(session['username'])
+            print("You have successfully Logged In")  
+            admin_conn[1].close()
+            return render_template('admin_home.html',msg=msg)
+        else:
+            print('user not present')
+            msg = 'user not present'
+            admin_conn[1].close()  
+            return render_template('admin.html', msg = msg)    
+    return render_template('admin.html')
+
+@app.route("/add_crime_category",methods=['GET','POST'])
+def add_crime_category():
+    return render_template('add_crime_category.html')
+
+@app.route("/add_crime_sub_category",methods=['GET','POST'])
+def add_crime_sub_category():
+    return render_template('add_crime_sub_category.html')
+    
+@app.route("/add_suspect_speech_language",methods=['GET','POST'])
+def add_suspect_speech_language():
+    return render_template('add_suspect_speech_language.html')   
+
+@app.route("/add_police_speech_language",methods=['GET','POST'])
+def add_police_speech_language():
+    return render_template('add_police_speech_language.html')
+
+@app.route("/add_target_text_category",methods=['GET','POST'])
+def add_target_text_language():
+    return render_template('add_target_text_language.html')
+
+@app.route("/admin_home",methods=['GET','POST'])
+def admin_home():
+    return render_template('admin_home.html')
 
 @app.route("/contact_us")
 def contact_us():

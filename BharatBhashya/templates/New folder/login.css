@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    font-family:'popins',sans-serif;
+} 
+/* navBar starts her e*/
+*{
+    font-family: 'Poppins', sans-serif;
+}
+.navbar
+{
+    padding:0;
+}
+.logo{
+    position: relative ;
+    left: 1%;
+}
+.bgcolor{
+    background-color: #00c9b5 !important;
+}
+.navbar-brand{
+    /* margin-left: 0.5rem; */
+    margin-left: 5%;
+}
+.navbar{
+    font-weight: bold;
+}
+.navlinks{
+    margin-left: -10%;
+    margin-right: 0%;
+}
+.nav-link{
+    margin: 0px 1rem;
+}
+.search-btn{
+    border:none;
+}
+.search-logo{
+    width:20px;
+    height:20px;
+}
+.header-login{
+    margin-left: 40px;
+    margin-right: 0;
+}
+/* navBar ends here */
+
+
+
+
+/* login Page starts her */
+.login-box{
+    border:2px solid #00c9b5;
+    border-radius: 7px;
+    background-color: white;
+    width:400px;
+    margin:4% 36%;
+    /* height:500px; */
+    padding:2%;
+}
+.login-title{
+    font-size:30px;
+    color:black;
+    font-weight:bold;
+    text-align: center;
+}
+.login-form{
+    margin:10% 0;
+}
+.login-input{
+    margin:2% 0;
+}
+.login-ip{
+    font-size:20px;
+}
+.form-img{
+    width:20px;
+    height:20px;
+}
+.login-forgot{
+    color:rgb(79, 79, 221);
+    text-decoration:none;
+    float:right;
+}
+.login-forgot:hover{
+    color:black;
+}
+.login-btn{
+    padding:0.5rem 2rem;
+    border-radius: 3px;
+    font-weight: bold;
+    /* color: #00c9b5; */
+}
+.center{
+    text-align: center;
+}
+.btn-line{
+    margin:15% 0 0 0;
+}
+/* .register-line{
+    margin:10% 0;
+} */
+.login-register{
+    text-decoration: none;
+    color:rgb(79, 79, 221);
+}
+.login-register:hover{
+        color: black;
+}
+/* =======================login Page ends here===================== */

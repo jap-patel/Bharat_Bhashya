@@ -104,7 +104,8 @@
                             {% if open_case_result[0] %}
                             <div class="accordion-body">
                                 Case ID: &nbsp;<label class="form-label" for="case_ID">
-                                    <a style="text-decoration: none;" href="{{url_for('case_detail', fir_number = open_case_result[0]['fir_number'])}}">{{open_case_result[0]['fir_number']}}</a></label><br>
+                                    <a style="text-decoration: none;" href="{{url_for('case_detail', fir_number = open_case_result[0]['fir_number'])}}">
+                                        {{open_case_result[0]['fir_number']}}</a></label><br>
                                 Summary: &nbsp;<label class="form-label" for="case_summary">{{open_case_result[0]['summary']}}</label>
                             </div>                            
                             {% else %}                     
@@ -126,7 +127,9 @@
                             data-bs-parent="#accordionExample">
                             {% if open_case_result[1] %}
                             <div class="accordion-body">
-                                Case ID: &nbsp;<label class="form-label" for="case_ID">{{open_case_result[1]['fir_number']}}</label><br>
+                                Case ID: &nbsp;<label class="form-label" for="case_ID">
+                                <a style="text-decoration: none;" href="{{url_for('case_detail', fir_number = open_case_result[1]['fir_number'])}}">
+                                    {{open_case_result[1]['fir_number']}}</a></label><br>
                                 Summary: &nbsp;<label class="form-label" for="case_summary">{{open_case_result[1]['summary']}}</label>
                             </div>
                             {% else %}                     
@@ -148,7 +151,9 @@
                             data-bs-parent="#accordionExample">
                             {% if open_case_result[2] %}
                             <div class="accordion-body">
-                                Case ID: &nbsp;<label class="form-label" for="case_ID">{{open_case_result[2]['fir_number']}}</label><br>
+                                Case ID: &nbsp;<label class="form-label" for="case_ID">
+                                <a style="text-decoration: none;" href="{{url_for('case_detail', fir_number = open_case_result[2]['fir_number'])}}">
+                                    {{open_case_result[2]['fir_number']}}</a></label><br>
                                 Summary: &nbsp;<label class="form-label" for="case_summary">{{open_case_result[2]['summary']}}</label>
                             </div>
                             {% else %}                     
@@ -170,7 +175,9 @@
                             data-bs-parent="#accordionExample">
                             {% if open_case_result[3] %}
                             <div class="accordion-body">
-                                Case ID: &nbsp;<label class="form-label" for="case_ID">{{open_case_result[3]['fir_number']}}</label><br>
+                                Case ID: &nbsp;<label class="form-label" for="case_ID">
+                                <a style="text-decoration: none;" href="{{url_for('case_detail', fir_number = open_case_result[3]['fir_number'])}}">
+                                    {{open_case_result[3]['fir_number']}}</a></label><br>
                                 Summary: &nbsp;<label class="form-label" for="case_summary">{{open_case_result[3]['summary']}}</label>
                             </div>
                             {% else %}                     
@@ -192,7 +199,9 @@
                             data-bs-parent="#accordionExample">
                             {% if open_case_result[4] %}
                             <div class="accordion-body">
-                                Case ID: &nbsp;<label class="form-label" for="case_ID">{{open_case_result[4]['fir_number']}}</label><br>
+                                Case ID: &nbsp;<label class="form-label" for="case_ID">
+                                <a style="text-decoration: none;" href="{{url_for('case_detail', fir_number = open_case_result[4]['fir_number'])}}">
+                                    {{open_case_result[4]['fir_number']}}</a></label><br>
                                 Summary: &nbsp;<label class="form-label" for="case_summary">{{open_case_result[4]['summary']}}</label>
                             </div>
                             {% else %}                     
@@ -220,7 +229,9 @@
                             data-bs-parent="#accordionExample-closed">
                             {% if close_case_result[0] %}
                             <div class="accordion-body">
-                                Case ID: &nbsp;<label class="form-label" for="case_ID">{{close_case_result[0]['fir_number']}}</label><br>
+                                Case ID: &nbsp;<label class="form-label" for="case_ID">
+                                <a style="text-decoration: none;" href="{{url_for('case_detail', fir_number = close_case_result[0]['fir_number'])}}">
+                                    {{close_case_result[0]['fir_number']}}</a></label><br>
                                 Summary: &nbsp;<label class="form-label" for="case_summary">{{close_case_result[0]['summary']}}</label>
                             </div>
                             {% else %}                     
