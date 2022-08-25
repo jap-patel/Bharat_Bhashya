@@ -82,6 +82,9 @@
               <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px"
                   class="fa">&#xf1ab;</i></span>
               <select id="state" style="height:45px;" name="police_speech_language" class="form-select" required>
+                {% if form_police_speech_language %}
+                <option value selected>{{form_police_speech_language}}</option>  
+                {% else %}                                  
                 <option value selected disabled>Choose</option>
                 <option>English</option>
                 <option>Gujarati</option>
@@ -91,6 +94,7 @@
                 <option>Telegu</option>
                 <option>Urdu</option>
                 <option>Malayalam</option>
+                {% endif %}
               </select>
             </div>
           </div>
@@ -101,6 +105,9 @@
               <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px"
                   class="fa">&#xf1ab;</i></span>
               <select id="state" style="height:45px;" name="suspect_speech_language" class="form-select" required>
+                {% if form_suspect_speech_language %}
+                <option value selected>{{form_suspect_speech_language}}</option>  
+                {% else %}                                  
                 <option value selected disabled>Choose</option>
                 <option>English</option>
                 <option>Gujarati</option>
@@ -110,6 +117,7 @@
                 <option>Telegu</option>
                 <option>Urdu</option>
                 <option>Malayalam</option>
+                {% endif %}
               </select>
             </div>
           </div>
@@ -120,6 +128,9 @@
               <span class="input-group-text" id="inputGroupPrepend"><i style="font-size:24px"
                   class="fa">&#xf1ab;</i></span>
               <select id="state" style="height:45px;" name="target_language" class="form-select" required>
+                {% if form_target_language %}
+                <option value selected>{{form_target_language}}</option>  
+                {% else %}                                  
                 <option value selected disabled>Choose</option>
                 <option>English</option>
                 <option>Gujarati</option>
@@ -129,6 +140,7 @@
                 <option>Telegu</option>
                 <option>Urdu</option>
                 <option>Malayalam</option>
+                {% endif %}
               </select>
             </div>
           </div>
@@ -139,7 +151,7 @@
           <div class="col-md-9">
             <label style="font-size:18px;position: relative;bottom:2px;">Current Speaker: <span style="color: red;">*</span></label>
             <div class="wrapper">
-              <input type="radio" class="speaker" name="speaker" value="police" id="option-1">
+              <input type="radio" class="speaker" name="speaker" value="police" id="option-1" checked>
               <input type="radio" class="speaker" name = "speaker" value="suspect" id="option-2">
                 <label for="option-1" class="option option-1">
                   <div class="dot"></div>
@@ -173,11 +185,10 @@
             </div>
             {% else %}
             <div class="col-md-9 mt-2">
-              <div class="screen-size" style="height: 350px;">  
+              <div>
+                <textarea class="screen-size" style="height: 350px;">
                 
-                
-                
-                
+                </textarea>
               </div>
             </div>
           {% endif %}                    
@@ -189,8 +200,20 @@
                 <span class="mic-text">Tap to Speak</span>
             </div>
             <div style="margin-top:24%;">
-              <a href="{{url_for('hear_last_dialogue', last_dialogue_text = last_dialogue_text, display_language_text = display_language_text, speaker = speaker, audio_language = audio_language)}}"><i style="font-size:18px" class="btn btn-outline-dark fa">&#xf028;</i></a>
+              <!-- <form action="/"></form> -->                      
+              {% if display_language_text %}
+              <a href="{{url_for('hear_last_dialogue', last_dialogue_text = last_dialogue_text, display_language_text = display_language_text, speaker = speaker, audio_language = audio_language, form_police_speech_language = form_police_speech_language, form_target_language = form_target_language, form_suspect_speech_language = form_suspect_speech_language)}}"><i style="font-size:18px" class="btn btn-outline-dark fa">&#xf028;</i></a>
               <span class="mic-text">Tap to hear</span></div>
+              {% else %}
+              <i style="font-size:18px" id="play_audio" class="btn btn-outline-dark fa">&#xf028;</i>              
+              <span class="mic-text">Tap to hear</span></div>
+              <script>
+                $("#play_audio").click(function() {
+                  alert("no text found to play the audio");
+                });
+            </script>
+              {% endif %}
+              
           </div>
         </div>
       </div>
@@ -198,21 +221,34 @@
   </form>
     <div class="row controls">
       <div>
-        <button class="btn btn-outline-warning" type="submit" style = "margin-top: -5%;">
+        <!-- <button class="btn btn-outline-warning" type="submit" style = "margin-top: -5%;">
           <i style="font-size:24px" class="fa">&#xf093;</i>
           &nbsp;
           Upload Recording
-        </button>
+        </button> -->
         &nbsp;&nbsp;&nbsp;  
         
-        
-        <a href="{{url_for('save_session')}}" class="btn btn-outline-success" type="submit" style = "margin-top: -5%;">
-          <i style="font-size:24px" class="fa">&#xf0c7;</i>
-          &nbsp;
-          Save Session
-        </a>
-        
+        {% if display_language_text %}
+          <a href="{{url_for('save_session', display_language_text = display_language_text, form_police_speech_language = form_police_speech_language, form_target_language = form_target_language, form_suspect_speech_language = form_suspect_speech_language)}}" class="btn btn-outline-success" type="submit" style = "margin-top: -5%;">
+            <i style="font-size:24px" class="fa">&#xf0c7;</i>
+            &nbsp;
+            Save Session
+          </a>  
+        {% else %}
+          <button class="btn btn-outline-success" id="saved_form_beforehand" type="submit" style = "margin-top: -5%;">
+            <i style="font-size:24px" class="fa">&#xf0c7;</i>
+            &nbsp;
+            Save Session
+          </button>
+          <script>
+              $("#saved_form_beforehand").click(function() {
+                alert("coversation not found, session can't be saved");
+              });
+          </script>
+        {% endif %}                     
+                      
         &nbsp;&nbsp;&nbsp;
+        
         <!-- Example single danger button -->
         <!--           
         <button type="button" class="btn btn-outline-primary">

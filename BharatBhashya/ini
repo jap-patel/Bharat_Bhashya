@@ -1,5 +1,0 @@
-; [PROD]
-; DB_URI = "mongodb+srv://abimanyu:26417@analytics.gf6av.mongodb.net/test"
-
-USER_NAME = r"abimanyu"
-PASSWORD = r"26417"

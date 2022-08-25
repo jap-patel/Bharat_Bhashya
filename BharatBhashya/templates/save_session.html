@@ -76,7 +76,15 @@
 
   <div class="create_case-box">
     <div class="create_case-title">SAVE SESSION</div>
-    <form action="/enter_session_details" method="POST" enctype="multipart/form-data" class="row g-3">
+    <form action="{{url_for('enter_session_details',msg = '', form_target_language = form_target_language, 
+    form_police_speech_language = form_police_speech_language, form_suspect_speech_language = form_suspect_speech_language) 
+    }}" method="POST" enctype="multipart/form-data" class="row g-3">
+      {% if msg %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{msg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>                                                                                                                                                     
+      {% endif %}   
       <div class="col-md-4">
         <label for="inputEmail4" class="form-label">FIR number</label>
         <div class="input-group has-validation">

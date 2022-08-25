@@ -18,8 +18,16 @@ def connect_to_db(collection_name):
         coll = db.cases
         return [db, client, coll]
     elif collection_name == 'sessions':
-        coll = db.cases
+        coll = db.sessions
         return [db, client, coll]
+    elif collection_name == 'security_agencies':
+        coll = db.security_agencies
+        return [db, client, coll]
+    elif collection_name == 'admin_user':
+        coll = db.admin_user
+        return [db, client, coll]
+    else:
+        return "nothing_to_return"
 
 def password_check(passwd):
       

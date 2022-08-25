@@ -1,16 +1,6 @@
-police: 
-	police: what is the name
-	suspect: હા તું મારું નામ જોબ મારી જોડે દિવ્યેશ બૈઠા
-	suspect: મારી પાછળ જે છે તે દુશ્મન સર છે તેની બાજુમાં મારી ડાબી બાજુ ડર્મેટ છે તેની ડાબી બાજુ વિચલન છે જે 13 છે
-	police: The name is Bansari
-	police: So it will be like this
-	suspect: નોકરી છે અને મેં ગુનો કર્યો છે
-	police: I have a 5S now and I fell for one of the offenders I think is involved within two days I have to inquire about it now.
-	police: My name is the same
-	police: Motor Ladki Marle will do nothing even if it is created
-	police: on my way
-	police: My name is Dinesh
+police: Patan
+	police: chant my name
 	police: 
-	police: 
-	police: my name is divyesh my friend name is jap with us jayshree dhan vishal is with cancer
+	police: Master
+	police: 11 were only found and the dollar is and started to start pictures for the top ten
 	

@@ -21,9 +21,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
-    <script src="state_city.js"></script>
-    <script src="crime_category.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>  
   <link href="/static/view_session.css" rel="stylesheet">
 </head>
 
@@ -77,99 +75,31 @@
     <table  class="table table-bordered table-striped center">
         <thead>
             <tr>
-                <td>Session Number</td>
-                <td>Common Language text File</td>
-                <td>Desired Language text File</td>
+                <td>Session-ID (number_name)</td>
+                <td>Session Conversation text File</td>
+                <td>Target Language text File</td>
+                <td>Session Incharge</td>
+                <td>Suspect Name</td>
+                <td>Session Date</td>
                 <td>Audio File</td>
             </tr>
         </thead>      
         <tbody>
             {% for ss in session_result %}
                 <tr>
-                    <td>{{ss}}</td>
-                    <td>{{ss['fir_number']}}</td>
-                    <td>{{ss['case_name']}}</td>
-                    <td>{{ss['summary']}}</td>
+                    <td>S{{ss['session_number']}}_{{ss['session_name']}}</td>
+                    <td><a style="text-decoration:none" href="{{url_for('session_conversation_text_file', 
+                      session_conversation_text_file = ss['session_conversation_text'])}}" target="_blank">
+                      Session Conversation Text</a></td>
+                    <td><a style="text-decoration:none" href="{{url_for('target_language_text_file', 
+                      target_language_text_file = ss['target_language_text'])}}" target="_blank">
+                      Target Language Text</a></td>                    
+                    <td>{{ss['session_incharge']}}</td>
+                    <td>{{ss['suspect_name']}}</td>
+                    <td>{{ss['session_date']}}</td>
+                    <td>Audio File</td>                        
                 </tr>                    
-            {% endfor %}
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            {% endfor %}                                       
             <tr>
                 <td></td>
                 <td></td>

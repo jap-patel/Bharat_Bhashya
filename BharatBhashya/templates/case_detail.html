@@ -129,6 +129,30 @@
           <tr>
             <th scope="col">Summary</th>
             <td>{{case_result[0]['summary']}}</td>
+          </tr>          
+          <tr>
+            <th scope="col">Case status</th>
+            {% if case_result[0]['case_status']=="open" %}
+              <td>Opened</td>
+            {% else %}
+              <td>Closed</td>
+            {% endif %}            
+          </tr>
+          <tr>
+            <th scope="col">Case Solved</th>
+            {% if case_result[0]['case_solved'] %}
+              <td>YES</td>
+            {% else %}
+              <td>NO</td>
+            {% endif %}                        
+          </tr>
+          <tr>
+            <th scope="col">Case allowed to be viewed by other Agencies</th>
+            {% if case_result[0]['allow_case_to_be_viewed'] %}
+              <td>YES</td>
+            {% else %}
+              <td>NO</td>
+            {% endif %}                                    
           </tr>
       </table>
     </div>
@@ -183,7 +207,7 @@
         </div>        
     </div>
     <div class="col-3" style="text-align:center; margin-top: 3%; margin-left: 25%; margin-bottom: 1%;">
-      <button type="submit" class="btn btn-primary">Save Changes </button>        
+      <button type="submit" class="btn btn-success">Save Changes </button>        
     </div>
   </form>
     <div class="col-15" style="text-align:center; margin-bottom:3%; margin-left:20%; margin-top: -3.5%; color:white">

@@ -1,0 +1,41 @@
+[{
+  "_id": {
+    "$oid": "63059e8c263a9c342479ca8c"
+  },
+  "agency_name ": "Central Bureau of Investigation (CBI)"
+},{
+  "_id": {
+    "$oid": "6305a013263a9c342479ca8d"
+  },
+  "agency_name": " Crime Investigation Department (CID)"
+},{
+  "_id": {
+    "$oid": "6305a03f263a9c342479ca8e"
+  },
+  "agency_name": "National Investigation Agency (NIA)"
+},{
+  "_id": {
+    "$oid": "6305a061263a9c342479ca8f"
+  },
+  "agency_name": "Narcotics Control Bureau (NCB)"
+},{
+  "_id": {
+    "$oid": "6305a07c263a9c342479ca90"
+  },
+  "agency_name": "Research and Analysis Wing (RAW)"
+},{
+  "_id": {
+    "$oid": "6305a0d1263a9c342479ca91"
+  },
+  "agency_name": "Gujarat Police"
+},{
+  "_id": {
+    "$oid": "6305a0ee263a9c342479ca92"
+  },
+  "agency_name": "Delhi Police"
+},{
+  "_id": {
+    "$oid": "6305a11f263a9c342479ca93"
+  },
+  "agency_name": "Punjab Police"
+}]
