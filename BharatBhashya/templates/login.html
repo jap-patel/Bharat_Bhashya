@@ -47,7 +47,17 @@
                     <a class="btn btn-outline-dark header-login" href="{{url_for('login')}}">Login</a>
                 </div>
                 </ul>
-        
+                
+                <div class="dropdown" style="display:none;">
+                  <div id="google_translate_element" style="margin-left: 50px;"></div>
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                          new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+                        }
+                    </script>
+                    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                </div>  
+
                 <!-- <form class="d-flex" role="search">                                                                                               (................ This code is for Search-Bar & Search-Button................ )                                                                 
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-light search-btn" type="submit"><img src="img/magnifying-glass.png" class="search-logo"></button>
